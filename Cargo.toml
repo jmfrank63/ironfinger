@@ -5,6 +5,9 @@ authors = ["Johannes Maria Frank <jmfrank63@gmail.com>"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+name = "viewer"
+path = "src/event_viewer.rs"
 
 [dependencies]
 druid = { git = "https://github.com/linebender/druid.git" }

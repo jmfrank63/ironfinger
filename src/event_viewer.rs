@@ -340,18 +340,16 @@ fn event_list() -> impl Widget<AppState> {
 }
 
 fn main() {
-    println!("Typewriter!");
-
-    let main_window = WindowDesc::new(build_root_widget)
+    let main_window = WindowDesc::new(build_root_widget())
         .title("Event Viewer")
         .window_size((760.0, 680.0));
 
     //start the application
     AppLauncher::with_window(main_window)
-        .use_simple_logger()
+        .log_to_console()
         .configure_env(|env, _| {
             env.set(theme::UI_FONT, FontDescriptor::default().with_size(12.0));
-            env.set(theme::LABEL_COLOR, TEXT_COLOR);
+            env.set(theme::TEXT_COLOR, TEXT_COLOR);
             env.set(theme::WIDGET_PADDING_HORIZONTAL, 2.0);
             env.set(theme::WIDGET_PADDING_VERTICAL, 2.0);
         })
