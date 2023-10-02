@@ -1,19 +1,37 @@
-use druid::{AppLauncher, WindowDesc, Widget, PlatformError, Screen};
-use druid::widget::Label;
-
-fn build_ui() -> impl Widget<()> {
-    Label::new("Hello world")
+use iced::{Sandbox, Element, widget::{text_editor, container}, Settings};
+fn main() -> iced::Result {
+    Editor::run(Settings::default())
 }
 
-fn main() -> Result<(), PlatformError> {
+struct Editor{
+    content: text_editor::Content,
+}
 
-    let rect = Screen::get_display_rect();
+#[derive(Debug, Clone)]
+enum Message {
+    Edit(text_editor::Action),
+}
 
-    println!("{:?}", rect);
-    let main_window = WindowDesc::new(build_ui())
-        .title("Typewriter")
-        .window_size((400.0, 400.0));
+impl Sandbox for Editor {
+    type Message = Message;
 
-    AppLauncher::with_window(main_window).launch(())?;
-    Ok(())
+    fn new() -> Self {
+        Self {
+            content: text_editor::Content::new(),
+        }
+    }
+    fn title(&self) -> String {
+        String::from("Editor - Iced")
+    }
+    fn update(&mut self, message: Self::Message) {
+        match message {
+            Message::Edit(action) => {
+                self.content.edit(action);
+            }
+        }
+    }
+    fn view(&self) -> Element<'_, Self::Message> {
+        let input = text_editor(&self.content).on_edit(Message::Edit);
+        container(input).padding(10).into()
+    }
 }
