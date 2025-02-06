@@ -7,8 +7,4 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rdev = "0.5.3"
-crossterm = "0.27.0"
-lazy_static = "1.4.0"
-iced = { git = "https://github.com/iced-rs/iced.git", branch = "master" }
-sdl2 = "0.36.0"
+raylib = { version = "5.0" }
